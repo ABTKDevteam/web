@@ -3,33 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ANBUOITOIKHONG - Minecraft Server</title>
+  <title>ANBUOITOIKHONG | Minecraft Server</title>
   <style>
+    :root {
+      --bg: #05070d;
+      --panel: rgba(15, 23, 42, 0.78);
+      --panel-2: #0f172a;
+      --green: #32ff7e;
+      --cyan: #38bdf8;
+      --purple: #a855f7;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --danger: #fb7185;
+      --border: rgba(148, 163, 184, 0.18);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background: #0b0f14;
-      color: #f5f5f5;
+      background:
+        radial-gradient(circle at top left, rgba(50, 255, 126, 0.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.13), transparent 28%),
+        linear-gradient(180deg, #05070d 0%, #0b1020 55%, #05070d 100%);
+      color: var(--text);
+      overflow-x: hidden;
     }
 
-    header {
-      min-height: 100vh;
-      background:
-        linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.8)),
-        url("https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=1600&q=80");
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 30px;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+      z-index: 50;
     }
 
     nav {
@@ -37,254 +58,451 @@
       top: 0;
       left: 0;
       width: 100%;
-      padding: 18px 8%;
+      z-index: 20;
+      padding: 16px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(8, 12, 18, 0.85);
-      backdrop-filter: blur(10px);
-      z-index: 10;
+      background: rgba(5, 7, 13, 0.76);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
     }
 
-    nav h1 {
-      color: #39ff88;
-      font-size: 22px;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
     }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: bold;
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      color: #031007;
+      border-radius: 10px;
+      box-shadow: 0 0 24px rgba(50, 255, 126, 0.35);
     }
 
-    nav a:hover {
-      color: #39ff88;
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
     }
 
-    .hero h2 {
-      font-size: clamp(42px, 8vw, 88px);
-      color: #39ff88;
-      text-shadow: 0 0 25px rgba(57, 255, 136, 0.5);
-      margin-bottom: 16px;
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 140px 8% 80px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 44px;
+      align-items: center;
+      position: relative;
+    }
+
+    .badge {
+      width: fit-content;
+      padding: 9px 14px;
+      border: 1px solid rgba(50, 255, 126, 0.34);
+      color: var(--green);
+      background: rgba(50, 255, 126, 0.08);
+      border-radius: 999px;
+      font-weight: 800;
+      margin-bottom: 22px;
+      box-shadow: 0 0 26px rgba(50, 255, 126, 0.12);
+    }
+
+    .hero h1 {
+      font-size: clamp(46px, 8vw, 92px);
+      line-height: 0.94;
+      margin-bottom: 20px;
+      letter-spacing: -3px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--green), var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 60px rgba(50, 255, 126, 0.18);
     }
 
     .hero p {
-      font-size: 20px;
-      max-width: 720px;
-      color: #ddd;
+      color: #cbd5e1;
+      font-size: 18px;
+      line-height: 1.75;
+      max-width: 700px;
       margin-bottom: 28px;
-      line-height: 1.6;
     }
 
-    .server-box {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(57, 255, 136, 0.4);
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 0 30px rgba(57, 255, 136, 0.12);
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
     }
 
-    .server-ip {
-      font-size: 24px;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 15px;
-    }
-
-    button {
-      background: #39ff88;
-      color: #07100b;
-      border: none;
-      padding: 14px 24px;
-      border-radius: 12px;
-      font-weight: bold;
+    .btn {
+      border: 0;
       cursor: pointer;
+      padding: 15px 22px;
+      border-radius: 14px;
+      font-weight: 900;
       transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
     }
 
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(57, 255, 136, 0.35);
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      color: #031007;
+      box-shadow: 0 14px 36px rgba(50, 255, 126, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: white;
+      border: 1px solid var(--border);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.01);
+    }
+
+    .ip-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .ip-strip span {
+      color: white;
+      padding: 7px 11px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .server-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.9));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .server-card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, rgba(50, 255, 126, 0.22), transparent, rgba(56, 189, 248, 0.2));
+      z-index: -1;
+    }
+
+    .cube {
+      height: 190px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(50, 255, 126, 0.2), rgba(56, 189, 248, 0.1)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.07) 0 12px, transparent 12px 24px);
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid var(--border);
+    }
+
+    .cube-icon {
+      font-size: 76px;
+      filter: drop-shadow(0 0 26px rgba(50, 255, 126, 0.45));
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .status-row strong {
+      color: white;
+    }
+
+    .online {
+      color: var(--green) !important;
     }
 
     section {
-      padding: 80px 8%;
+      padding: 84px 8%;
     }
 
-    .section-title {
+    .section-head {
       text-align: center;
-      font-size: 36px;
-      margin-bottom: 45px;
-      color: #39ff88;
+      margin-bottom: 42px;
     }
 
-    .cards {
+    .section-head h2 {
+      font-size: clamp(32px, 5vw, 52px);
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
     }
 
     .card {
-      background: #121922;
-      padding: 28px;
-      border-radius: 18px;
-      border: 1px solid #1f2c38;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.22);
       transition: 0.2s;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      border-color: #39ff88;
+      transform: translateY(-6px);
+      border-color: rgba(50, 255, 126, 0.42);
+    }
+
+    .card .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(50, 255, 126, 0.12);
+      color: var(--green);
+      font-size: 24px;
+      margin-bottom: 18px;
     }
 
     .card h3 {
-      color: #39ff88;
-      margin-bottom: 12px;
-      font-size: 24px;
+      font-size: 23px;
+      margin-bottom: 10px;
     }
 
     .card p, .card li {
-      color: #ccc;
-      line-height: 1.6;
+      color: #b6c2d2;
+      line-height: 1.7;
     }
 
     ul {
-      padding-left: 20px;
+      padding-left: 18px;
     }
 
-    .join {
-      text-align: center;
-      background: linear-gradient(135deg, #102018, #0b0f14);
+    .wide {
+      background: linear-gradient(135deg, rgba(50, 255, 126, 0.12), rgba(56, 189, 248, 0.09));
+      border: 1px solid rgba(50, 255, 126, 0.22);
+      border-radius: 30px;
+      padding: 42px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      box-shadow: var(--shadow);
     }
 
-    .join p {
-      max-width: 700px;
-      margin: 0 auto 25px;
-      color: #ccc;
+    .wide h2 {
+      font-size: clamp(30px, 5vw, 48px);
+      margin-bottom: 12px;
+    }
+
+    .wide p {
+      color: #cbd5e1;
       line-height: 1.7;
-      font-size: 18px;
     }
 
     footer {
-      text-align: center;
-      padding: 28px;
-      background: #070a0e;
-      color: #aaa;
+      padding: 32px 8%;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      background: rgba(5, 7, 13, 0.72);
     }
 
-    @media (max-width: 700px) {
-      nav {
-        flex-direction: column;
-        gap: 10px;
+    @media (max-width: 920px) {
+      .hero, .wide {
+        grid-template-columns: 1fr;
       }
 
-      nav a {
-        margin: 0 8px;
-        font-size: 14px;
+      .grid {
+        grid-template-columns: 1fr;
       }
 
-      .hero p {
-        font-size: 17px;
+      .nav-links {
+        display: none;
       }
     }
   </style>
 </head>
 <body>
+  <div class="noise"></div>
+
   <nav>
-    <h1>ANBUOITOIKHONG</h1>
-    <div>
-      <a href="#about">Giới thiệu</a>
-      <a href="#modes">Mode</a>
+    <a class="logo" href="#">
+      <span class="logo-mark">A</span>
+      <span>ANBUOITOIKHONG</span>
+    </a>
+    <div class="nav-links">
+      <a href="#modes">Mode chơi</a>
+      <a href="#features">Tính năng</a>
       <a href="#rules">Luật</a>
-      <a href="#join">Tham gia</a>
+      <a href="#join">Vào server</a>
     </div>
   </nav>
 
-  <header>
-    <div class="hero">
-      <h2>ANBUOITOIKHONG</h2>
-      <p>Server Minecraft sinh tồn, PvP và sự kiện cộng đồng dành cho anh em thích cày cuốc, giao tranh và xây dựng đế chế riêng.</p>
+  <main class="hero">
+    <div>
+      <div class="badge">⚡ Minecraft Java 1.20 - 1.21+</div>
+      <h1>Chiến đấu. Sinh tồn. <span class="gradient-text">Thống trị.</span></h1>
+      <p>
+        ANBUOITOIKHONG là server Minecraft dành cho game thủ thích PvP, cày cuốc,
+        săn boss, leo rank và xây dựng bang hội. Vào server, chọn phe, farm đồ và trở thành huyền thoại.
+      </p>
 
-      <div class="server-box">
-        <div class="server-ip" id="serverIp">play.anbuoitoikhong.vn</div>
-        <button onclick="copyIP()">Copy IP Server</button>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="copyIP()">📋 Copy IP Server</button>
+        <a class="btn btn-secondary" href="#modes">🎮 Xem mode chơi</a>
+      </div>
+
+      <div class="ip-strip">
+        IP: <span id="serverIp">play.anbuoitoikhong.vn</span>
+        Discord: <span>discord.gg/anbuoitoikhong</span>
       </div>
     </div>
-  </header>
 
-  <section id="about">
-    <h2 class="section-title">Về Server</h2>
-    <div class="cards">
+    <aside class="server-card">
+      <div class="cube">
+        <div class="cube-icon">⛏️</div>
+      </div>
+      <div class="status-row"><span>Trạng thái</span><strong class="online">ONLINE</strong></div>
+      <div class="status-row"><span>Người chơi</span><strong>128 / 500</strong></div>
+      <div class="status-row"><span>Phiên bản</span><strong>1.20 - 1.21+</strong></div>
+      <div class="status-row"><span>Mode chính</span><strong>Survival PvP</strong></div>
+    </aside>
+  </main>
+
+  <section id="modes">
+    <div class="section-head">
+      <h2><span class="gradient-text">Mode chơi</span> nổi bật</h2>
+      <p>Thiết kế cho cả người mới lẫn game thủ hardcore: dễ vào, khó làm trùm.</p>
+    </div>
+
+    <div class="grid">
       <div class="card">
-        <h3>Phiên bản</h3>
-        <p>Hỗ trợ Minecraft Java 1.20 - 1.21+, tối ưu cho trải nghiệm mượt và ổn định.</p>
+        <div class="icon">🌲</div>
+        <h3>Survival Economy</h3>
+        <p>Sinh tồn, claim đất, shop người chơi, nhiệm vụ ngày và hệ thống tiền tệ.</p>
       </div>
       <div class="card">
-        <h3>Cộng đồng</h3>
-        <p>Môi trường vui vẻ, có staff hỗ trợ, phù hợp cho cả người mới và người chơi lâu năm.</p>
+        <div class="icon">⚔️</div>
+        <h3>PvP Arena</h3>
+        <p>Đấu trường PvP, kit cân bằng, bảng xếp hạng kill/death và phần thưởng mùa.</p>
       </div>
       <div class="card">
-        <h3>Sự kiện</h3>
-        <p>Event PvP, săn boss, đua top tài nguyên và nhiều phần thưởng hấp dẫn theo mùa.</p>
+        <div class="icon">🐉</div>
+        <h3>Boss Dungeon</h3>
+        <p>Săn boss, party dungeon, vật phẩm hiếm, enchant custom và trang bị đặc biệt.</p>
       </div>
     </div>
   </section>
 
-  <section id="modes">
-    <h2 class="section-title">Mode Chơi</h2>
-    <div class="cards">
+  <section id="features">
+    <div class="section-head">
+      <h2>Tính năng cho <span class="gradient-text">game thủ</span></h2>
+      <p>Server tập trung vào trải nghiệm lâu dài, cạnh tranh công bằng và cộng đồng mạnh.</p>
+    </div>
+
+    <div class="grid">
       <div class="card">
-        <h3>Survival</h3>
-        <p>Sinh tồn, claim đất, kinh tế, shop người chơi và hệ thống nhiệm vụ.</p>
+        <div class="icon">🏆</div>
+        <h3>Rank & Top</h3>
+        <p>Đua top money, top kill, top playtime và nhận phần thưởng theo tuần/tháng.</p>
       </div>
       <div class="card">
-        <h3>PvP Arena</h3>
-        <p>Đấu trường PvP công bằng, kit riêng, bảng xếp hạng và phần thưởng.</p>
+        <div class="icon">🛡️</div>
+        <h3>Anti Cheat</h3>
+        <p>Chống hack, chống xray, bảo vệ người chơi thật khỏi cheat client và bug abuse.</p>
       </div>
       <div class="card">
-        <h3>Boss & Dungeon</h3>
-        <p>Đánh boss, farm vật phẩm hiếm, nâng cấp trang bị và party cùng bạn bè.</p>
+        <div class="icon">🎁</div>
+        <h3>Event liên tục</h3>
+        <p>Sự kiện drop, săn boss, war clan, PvP tournament và giftcode cho người chơi.</p>
       </div>
     </div>
   </section>
 
   <section id="rules">
-    <h2 class="section-title">Luật Server</h2>
-    <div class="cards">
+    <div class="section-head">
+      <h2>Luật server</h2>
+      <p>Vào chơi vui, combat cháy, nhưng phải công bằng.</p>
+    </div>
+
+    <div class="grid">
       <div class="card">
-        <h3>Không hack/cheat</h3>
-        <p>Dùng hack client, xray, autoclick hoặc bug game sẽ bị xử lý nghiêm.</p>
+        <h3>01. Không hack</h3>
+        <p>Xray, kill aura, autoclick, fly, speed hoặc mod gian lận đều bị ban.</p>
       </div>
       <div class="card">
-        <h3>Tôn trọng người chơi</h3>
-        <p>Không toxic quá mức, spam, xúc phạm hoặc phá trải nghiệm của người khác.</p>
+        <h3>02. Không phá game</h3>
+        <p>Không lợi dụng bug, dupe item, crash server hoặc phá trải nghiệm người khác.</p>
       </div>
       <div class="card">
-        <h3>Không grief</h3>
-        <p>Không phá nhà, lừa đảo hoặc lợi dụng lỗi hệ thống để trục lợi.</p>
+        <h3>03. Tôn trọng cộng đồng</h3>
+        <p>Không spam, toxic quá mức, lừa đảo hoặc xúc phạm người chơi/staff.</p>
       </div>
     </div>
   </section>
 
-  <section class="join" id="join">
-    <h2 class="section-title">Tham Gia Ngay</h2>
-    <p>Mở Minecraft Java, chọn Multiplayer, thêm server với IP bên dưới và bắt đầu hành trình của bạn tại ANBUOITOIKHONG.</p>
-    <div class="server-box" style="display:inline-block;">
-      <div class="server-ip">play.anbuoitoikhong.vn</div>
-      <button onclick="copyIP()">Copy IP Server</button>
+  <section id="join">
+    <div class="wide">
+      <div>
+        <h2>Sẵn sàng vào server?</h2>
+        <p>Mở Minecraft Java → Multiplayer → Add Server → nhập IP và bắt đầu hành trình tại ANBUOITOIKHONG.</p>
+      </div>
+      <button class="btn btn-primary" onclick="copyIP()">🚀 Copy IP ngay</button>
     </div>
   </section>
 
   <footer>
-    © 2026 ANBUOITOIKHONG Minecraft Server. All rights reserved.
+    <span>© 2026 ANBUOITOIKHONG. Minecraft Server Community.</span>
+    <span>Website by ANBUOITOIKHONG Team</span>
   </footer>
 
   <script>
     function copyIP() {
       const ip = document.getElementById("serverIp").innerText;
       navigator.clipboard.writeText(ip).then(() => {
-        alert("Đã copy IP server: " + ip);
+        alert("Đã copy IP: " + ip);
       });
     }
   </script>
