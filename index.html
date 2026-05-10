@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANBUOITOIKHONG - Minecraft Server</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0f14;
+      color: #f5f5f5;
+    }
+
+    header {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.8)),
+        url("https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(8, 12, 18, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    nav h1 {
+      color: #39ff88;
+      font-size: 22px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #39ff88;
+    }
+
+    .hero h2 {
+      font-size: clamp(42px, 8vw, 88px);
+      color: #39ff88;
+      text-shadow: 0 0 25px rgba(57, 255, 136, 0.5);
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      max-width: 720px;
+      color: #ddd;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .server-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(57, 255, 136, 0.4);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 0 30px rgba(57, 255, 136, 0.12);
+    }
+
+    .server-ip {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #39ff88;
+      color: #07100b;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(57, 255, 136, 0.35);
+    }
+
+    section {
+      padding: 80px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 45px;
+      color: #39ff88;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: #121922;
+      padding: 28px;
+      border-radius: 18px;
+      border: 1px solid #1f2c38;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #39ff88;
+    }
+
+    .card h3 {
+      color: #39ff88;
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+
+    .card p, .card li {
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .join {
+      text-align: center;
+      background: linear-gradient(135deg, #102018, #0b0f14);
+    }
+
+    .join p {
+      max-width: 700px;
+      margin: 0 auto 25px;
+      color: #ccc;
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px;
+      background: #070a0e;
+      color: #aaa;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav a {
+        margin: 0 8px;
+        font-size: 14px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>ANBUOITOIKHONG</h1>
+    <div>
+      <a href="#about">Giới thiệu</a>
+      <a href="#modes">Mode</a>
+      <a href="#rules">Luật</a>
+      <a href="#join">Tham gia</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="hero">
+      <h2>ANBUOITOIKHONG</h2>
+      <p>Server Minecraft sinh tồn, PvP và sự kiện cộng đồng dành cho anh em thích cày cuốc, giao tranh và xây dựng đế chế riêng.</p>
+
+      <div class="server-box">
+        <div class="server-ip" id="serverIp">play.anbuoitoikhong.vn</div>
+        <button onclick="copyIP()">Copy IP Server</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2 class="section-title">Về Server</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Phiên bản</h3>
+        <p>Hỗ trợ Minecraft Java 1.20 - 1.21+, tối ưu cho trải nghiệm mượt và ổn định.</p>
+      </div>
+      <div class="card">
+        <h3>Cộng đồng</h3>
+        <p>Môi trường vui vẻ, có staff hỗ trợ, phù hợp cho cả người mới và người chơi lâu năm.</p>
+      </div>
+      <div class="card">
+        <h3>Sự kiện</h3>
+        <p>Event PvP, săn boss, đua top tài nguyên và nhiều phần thưởng hấp dẫn theo mùa.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="modes">
+    <h2 class="section-title">Mode Chơi</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Survival</h3>
+        <p>Sinh tồn, claim đất, kinh tế, shop người chơi và hệ thống nhiệm vụ.</p>
+      </div>
+      <div class="card">
+        <h3>PvP Arena</h3>
+        <p>Đấu trường PvP công bằng, kit riêng, bảng xếp hạng và phần thưởng.</p>
+      </div>
+      <div class="card">
+        <h3>Boss & Dungeon</h3>
+        <p>Đánh boss, farm vật phẩm hiếm, nâng cấp trang bị và party cùng bạn bè.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <h2 class="section-title">Luật Server</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Không hack/cheat</h3>
+        <p>Dùng hack client, xray, autoclick hoặc bug game sẽ bị xử lý nghiêm.</p>
+      </div>
+      <div class="card">
+        <h3>Tôn trọng người chơi</h3>
+        <p>Không toxic quá mức, spam, xúc phạm hoặc phá trải nghiệm của người khác.</p>
+      </div>
+      <div class="card">
+        <h3>Không grief</h3>
+        <p>Không phá nhà, lừa đảo hoặc lợi dụng lỗi hệ thống để trục lợi.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="join" id="join">
+    <h2 class="section-title">Tham Gia Ngay</h2>
+    <p>Mở Minecraft Java, chọn Multiplayer, thêm server với IP bên dưới và bắt đầu hành trình của bạn tại ANBUOITOIKHONG.</p>
+    <div class="server-box" style="display:inline-block;">
+      <div class="server-ip">play.anbuoitoikhong.vn</div>
+      <button onclick="copyIP()">Copy IP Server</button>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 ANBUOITOIKHONG Minecraft Server. All rights reserved.
+  </footer>
+
+  <script>
+    function copyIP() {
+      const ip = document.getElementById("serverIp").innerText;
+      navigator.clipboard.writeText(ip).then(() => {
+        alert("Đã copy IP server: " + ip);
+      });
+    }
+  </script>
+</body>
+</html>
